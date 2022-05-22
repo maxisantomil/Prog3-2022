@@ -50,6 +50,10 @@ public class Libro {
 	public int getId() {
 		return id;
 	}
+	
+	public boolean tieneGenero(String genero){
+		return this.getGeneros().contains(genero);
+	}
 	@Override
 	public String toString() {
 		return "Libro [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", cant_paginas=" + cant_paginas

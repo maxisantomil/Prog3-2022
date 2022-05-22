@@ -1,44 +1,44 @@
 
 public class Tree {
 	
-	private Libro libro;
+	private Genero genero;
 	private Tree left;
 	private Tree right;
 	private int size = 0;
 	
 	public Tree() {
-		this.libro=null;
+		this.genero=null;
 		this.left=null;
 		this.right=null;
 	}
 	
-	public Tree(Libro l) {
-		this.libro=l;
+	public Tree(Genero g) {
+		this.genero=g;
 		this.left = null;
 		this.right = null;
 		this.size++;
 	}
 	
-	public void addLibro(Libro newLibro) {
-		if (this.libro == null) 
-			this.libro = newLibro;
+	public void addGenero(Genero newGenero) {
+		if (this.genero == null) 
+			this.genero = newGenero;
 		else {
-			if (this.libro.getId() > newLibro.getId()) {
+			if (this.genero.getNombre().compareTo(newGenero.getNombre())>0) {
 				if (this.left == null) {
-					this.left = new Tree(newLibro);
+					this.left = new Tree(newGenero);
 					this.size++;
 				}
 				else {
-					this.left.addLibro(newLibro);
+					this.left.addGenero(newGenero);
 					this.size++;
 				}
-			} else if (this.libro.getId() < newLibro.getId()) {
+			} else if (this.genero.getNombre().compareTo(newGenero.getNombre())<0) {
 				if (this.right == null) {
-					this.right = new Tree(newLibro);
+					this.right = new Tree(newGenero);
 					this.size++;
 				}
 				else {
-					this.right.addLibro(newLibro);
+					this.right.addGenero(newGenero);
 					this.size++;
 				}
 					
@@ -52,15 +52,15 @@ public class Tree {
 		}
 		
 		// O(h) donde h es la altura, en el peor de los casos debe recorrer la rama mas baja
-		public boolean hasElement(int valor) {
-				if (this.libro.getId() == valor) {
+		public boolean hasElement(String valor) {
+				if (this.genero.getNombre().equals(valor)) {
 					return true;
 				}
 				else {
-					if (this.libro.getId() < valor && right!=null) {
+					if (this.genero.getNombre().compareTo(valor)<0 && right!=null) {
 						return this.right.hasElement(valor);
 					}
-					else if (this.libro.getId() > valor && left!=null) {
+					else if (this.genero.getNombre().compareTo(valor)>0 && left!=null) {
 							return this.left.hasElement(valor);
 						}
 					
@@ -78,7 +78,7 @@ public class Tree {
 
 		//imprime raiz despues rama izquierda y despues rama derecha
 		public void printPreOrder() {
-			System.out.print(this.libro + " ");
+			System.out.print(this.genero + " ");
 			if (this.left!=null){
 				this.left.printPreOrder();
 			}else
@@ -89,7 +89,7 @@ public class Tree {
 				System.out.print("- ");
 		}
 		public void printPostOrder() {
-			if (this.libro == null)
+			if (this.genero == null)
 				System.out.print("-");
 			if (this.left!=null){
 				this.left.printPostOrder();
@@ -101,15 +101,15 @@ public class Tree {
 				System.out.print("-");
 				
 			}
-			System.out.print(this.libro);
+			System.out.print(this.genero);
 			
 		}
 
 		public void printInOrder() {
 			if (this.left!=null)
 				this.left.printInOrder();
-			if (this.libro!=null)
-				System.out.println(this.libro + " ");
+			if (this.genero!=null)
+				System.out.println(this.genero + " ");
 			if (this.right!=null)
 				this.right.printInOrder();
 			}
